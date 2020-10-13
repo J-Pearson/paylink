@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-use App\Fibonacci;
+use App\Repositories\FibonacciRepository;
 use App\Http\Resources\FibonacciResource;
 
 use Exception;
@@ -33,10 +33,12 @@ class FibonacciController extends Controller
     			return response()->json($errors, 400);
     		}
 
-            $fibonacci = new Fibonacci();
+            $fibonacci = new FibonacciRepository();
             $fibonacci->calculateFibonacci($request->nth);
 
-            return new FibonacciResource($fibonacci);
+
+
+            return new FibonacciResource($fibonacci->model);
 
     	} catch (Exception $e) {
     		return $e;

@@ -14,6 +14,10 @@ class FizzbuzzResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+            'first'   => $this->first,
+            'last'    => $this->last,
+            'results' => $this->results
+        ];
     }
 }

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-use App\Fizzbuzz;
+use App\Repositories\FizzbuzzRepository;
 use App\Http\Resources\FizzbuzzResource;
 
 use Exception;
@@ -44,11 +44,11 @@ class FizzbuzzController extends Controller
     		}
 
     		// Calculate Fizzbuzz
-            $fizzbuzz = new Fizzbuzz();
+            $fizzbuzz = new FizzbuzzRepository();
             $fizzbuzz->calculateFizzBuzz($first, $last);
 
             // Return JSON Resource
-            return new FizzbuzzResource($fizzbuzz);
+            return new FizzbuzzResource($fizzbuzz->model);
 
     	} catch (Exception $e) {
     		return $e;
